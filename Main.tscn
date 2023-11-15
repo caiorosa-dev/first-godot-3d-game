@@ -1,0 +1,384 @@
+[gd_scene load_steps=17 format=3 uid="uid://bxjsxcdmcyrok"]
+
+[ext_resource type="Shader" path="res://SkyShader.gdshader" id="1_frc7c"]
+[ext_resource type="PackedScene" uid="uid://36lghw8pj66m" path="res://assets/floor_dirt_large.gltf.glb" id="1_ms72o"]
+[ext_resource type="PackedScene" uid="uid://dnmh2c56btygy" path="res://Character.tscn" id="2_xm2md"]
+[ext_resource type="PackedScene" uid="uid://dml5jhh22lt48" path="res://assets/wall.gltf.glb" id="4_4hunu"]
+[ext_resource type="PackedScene" uid="uid://bvn58n5od5quy" path="res://assets/floor_tile_big_spikes.glb" id="5_d3o6n"]
+[ext_resource type="PackedScene" uid="uid://b1ul3lfg8i4ej" path="res://assets/bottle_A_green.gltf.glb" id="6_i2j2k"]
+[ext_resource type="Script" path="res://assets/Flutuar.cs" id="7_woncn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oipru"]
+shader = ExtResource("1_frc7c")
+shader_parameter/skyColor = Color(0.521569, 0.678431, 1, 1)
+
+[sub_resource type="Sky" id="Sky_jsrrq"]
+sky_material = SubResource("ShaderMaterial_oipru")
+
+[sub_resource type="Environment" id="Environment_0jqct"]
+background_mode = 2
+sky = SubResource("Sky_jsrrq")
+ambient_light_source = 3
+reflected_light_source = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_my042"]
+radius = 0.521762
+height = 2.82347
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1rne5"]
+size = Vector3(4, 4, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bg20j"]
+size = Vector3(8, 0.125, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o8ylg"]
+size = Vector3(2.25, 4, 2.25)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_omfq3"]
+height = 1.83976
+radius = 0.209488
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1k1u0"]
+size = Vector3(67.1164, 1, 78.9481)
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.207014, 0.109046, -0.0517683)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0jqct")
+
+[node name="Barbarian" parent="." instance=ExtResource("2_xm2md")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.24561, 0.0983407, 8.72177)
+
+[node name="Area3D" type="Area3D" parent="Barbarian"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barbarian/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10215, 0)
+shape = SubResource("CapsuleShape3D_my042")
+
+[node name="wall_gltf" parent="." instance=ExtResource("4_4hunu")]
+transform = Transform3D(0.686631, 0, -0.727006, 0, 1, 0, 0.727006, 0, 0.686631, 2.96517, 0.0623193, 6.50931)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall_gltf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01064, 0)
+shape = SubResource("BoxShape3D_1rne5")
+
+[node name="Plataformas" type="Node3D" parent="."]
+
+[node name="Plataforma 4" type="Node3D" parent="Plataformas"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -15.4108, 5.88258, -6.4417)
+
+[node name="Chao" type="StaticBody3D" parent="Plataformas/Plataforma 4"]
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 4/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 4/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 4/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 4/Chao" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 4/Chao"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao2" type="StaticBody3D" parent="Plataformas/Plataforma 4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 4/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 4/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 4/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 4/Chao2" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 4/Chao2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao3" type="StaticBody3D" parent="Plataformas/Plataforma 4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7.99992)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 4/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 4/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 4/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 4/Chao3" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 4/Chao3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao4" type="StaticBody3D" parent="Plataformas/Plataforma 4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 4/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 4/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 4/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 4/Chao4" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 4/Chao4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Plataforma 3" type="Node3D" parent="Plataformas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.4108, 5.97361, -18.4361)
+
+[node name="Chao" type="StaticBody3D" parent="Plataformas/Plataforma 3"]
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 3/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 3/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 3/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 3/Chao" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 3/Chao"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao2" type="StaticBody3D" parent="Plataformas/Plataforma 3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 3/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 3/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 3/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 3/Chao2" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 3/Chao2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao3" type="StaticBody3D" parent="Plataformas/Plataforma 3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7.99992)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 3/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 3/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 3/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 3/Chao3" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 3/Chao3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao4" type="StaticBody3D" parent="Plataformas/Plataforma 3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 3/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 3/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 3/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 3/Chao4" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 3/Chao4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Plataforma 2" type="Node3D" parent="Plataformas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8787, 1.92365, 0)
+
+[node name="Chao" type="StaticBody3D" parent="Plataformas/Plataforma 2"]
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 2/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 2/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 2/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 2/Chao" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 2/Chao"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao2" type="StaticBody3D" parent="Plataformas/Plataforma 2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 2/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 2/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 2/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 2/Chao2" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 2/Chao2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao3" type="StaticBody3D" parent="Plataformas/Plataforma 2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7.99992)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 2/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 2/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 2/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 2/Chao3" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 2/Chao3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao4" type="StaticBody3D" parent="Plataformas/Plataforma 2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma 2/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma 2/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma 2/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma 2/Chao4" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma 2/Chao4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Plataforma Base" type="Node3D" parent="Plataformas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="Chao" type="StaticBody3D" parent="Plataformas/Plataforma Base"]
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma Base/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma Base/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma Base/Chao" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma Base/Chao" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma Base/Chao"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao2" type="StaticBody3D" parent="Plataformas/Plataforma Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma Base/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma Base/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma Base/Chao2" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma Base/Chao2" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma Base/Chao2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao3" type="StaticBody3D" parent="Plataformas/Plataforma Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7.99992)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma Base/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma Base/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma Base/Chao3" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma Base/Chao3" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma Base/Chao3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Chao4" type="StaticBody3D" parent="Plataformas/Plataforma Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="floor_dirt_large_gltf4" parent="Plataformas/Plataforma Base/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_dirt_large_gltf3" parent="Plataformas/Plataforma Base/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="floor_dirt_large_gltf2" parent="Plataformas/Plataforma Base/Chao4" instance=ExtResource("1_ms72o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_dirt_large_gltf" parent="Plataformas/Plataforma Base/Chao4" instance=ExtResource("1_ms72o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma Base/Chao4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99954, 0, 2.00068)
+shape = SubResource("BoxShape3D_bg20j")
+
+[node name="Pikudos" parent="." instance=ExtResource("5_d3o6n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.47251, -0.0438185, 1.34726)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pikudos"]
+shape = SubResource("BoxShape3D_o8ylg")
+
+[node name="Garrafa" parent="." instance=ExtResource("6_i2j2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.9792, 2.56852, 10.2295)
+script = ExtResource("7_woncn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Garrafa"]
+shape = SubResource("CylinderShape3D_omfq3")
+
+[node name="Void" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.88319, -3.80981, -8.23287)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Void"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -18.7672, 0)
+shape = SubResource("BoxShape3D_1k1u0")
+
+[connection signal="body_entered" from="Barbarian/Area3D" to="Barbarian" method="_on_Area_body_entered"]
